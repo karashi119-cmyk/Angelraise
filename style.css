@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  
+  /* --- バグ対策済みの背景設定 --- */
+  background-color: skyblue; /* 画像が読み込まれるまでの保険 */
+  background-image: url('img/background.png');
+  background-repeat: repeat-y; 
+  background-position: top center;
+  
+  /* background-size を contain または 100% だけで指定 */
+  background-size: 100% auto; 
+  
+  /* 一部のスマホで逆さまや拡大バグを起こす attachment を一旦外す */
+  background-attachment: local; 
+  
+  image-rendering: pixelated;
+  font-family: 'DotGothic16', sans-serif !important;
+  color: white;
+  overflow-x: hidden;
+}
+
+
+#top, #intro, #blog {
+  width: 100%; display: flex; flex-direction: column; align-items: center; min-height: 100vh;
+}
+
+.header { width: 100%; height: auto; display: block; }
+
+.menu {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 30px auto;
+}
+.btn { width: auto; max-width: 100%; cursor: pointer; }
+
+/* カウンター */
+.counter-window {
+  position: relative; width: fit-content; max-width: 95%; margin: 80vh auto 100px;
+  display: flex; justify-content: center; align-items: center;
+}
+.window-bg { position: absolute; width: 100%; height: 100%; z-index: 1; }
+.window-content {
+  position: relative; z-index: 2; padding: 40px 60px; text-align: center;
+}
+.counter-text, .counter-num {
+  font-size: 64px; font-weight: bold; color: #ff4fa3;
+  text-shadow: 3px 3px 0 #fff, -3px 3px 0 #fff, 3px -3px 0 #fff, -3px 3px 0 #fff;
+}
+
+/* 日記ページ：画面いっぱい & ボタン位置調整 */
+.diary-container { position: relative; width: 100%; }
+.diary-img, .intro-img { width: 100%; height: auto; display: block; }
+
+.page-buttons-overlay {
+  position: absolute; top: 70%; left: 0; width: 100%;
+  display: flex; justify-content: space-between; padding: 0 15px;
+  box-sizing: border-box; pointer-events: none;
+}
+.page-btn {
+  width: auto; max-width: 80px; opacity: 1; pointer-events: none; /* くっきり無効化 */
+}
+
+/* ポップアップ共通 */
+.popup {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.85); display: flex; justify-content: center; align-items: center; z-index: 1000;
+}
+.popup-image-container { position: relative; width: 85%; max-width: 350px; }
+.profile-popup-img, .coming-popup-img { width: 100%; height: auto; border: 3px solid white; display: block; }
+
+/* SNSアイコンを画像に被せる */
+.sns-links {
+  position: absolute; bottom: 30px; left: 0; width: 100%;
+  display: flex; justify-content: center; gap: 30px; z-index: 1010;
+}
+.sns-icon { width: 48px; height: auto; filter: drop-shadow(0 0 5px white); }
+
+.close-button {
+  position: absolute; top: -15px; right: -15px; width: 40px; height: 40px;
+  background: white; color: #ff4fa3; border-radius: 50%;
+  display: flex; justify-content: center; align-items: center; font-size: 28px; cursor: pointer; z-index: 1020;
+}
+
+.top-btn { margin: 30px 0 50px; padding: 10px 20px; font-family: 'DotGothic16'; cursor: pointer; }

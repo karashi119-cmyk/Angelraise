@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Angelraise</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div id="top">
+    <img src="img/toppage.png" class="header">
+    <div class="menu">
+      <img src="img/Introduction.png" class="btn" onclick="showIntro()">
+      <img src="img/GAME.png" class="btn" onclick="openComing()">
+      <img src="img/Blog.png" class="btn" onclick="showBlog()">
+      <img src="img/PROFILE.png" class="btn" onclick="openProfile()">
+    </div>
+    <div class="counter-window">
+      <img src="img/window.png" class="window-bg">
+      <div class="window-content">
+        <p class="counter-text">あなたは</p>
+        <div class="counter-line">
+          <span id="count" class="counter-num">000000</span>
+          <span class="counter-text">人目の</span>
+        </div>
+        <p class="counter-text">迷い子です</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="intro" style="display:none;">
+    <img src="img/INTRO.png" class="intro-img">
+    <button class="top-btn" onclick="backToTop()">TOP</button>
+  </div>
+
+  <div id="blog" style="display:none;">
+    <div class="diary-container">
+      <img id="diaryImage" src="img/diary1.png" class="diary-img">
+      <div class="page-buttons-overlay">
+        <img id="backBtn" src="img/BACK.png" class="page-btn" onclick="prevDiary()">
+        <img id="nextBtn" src="img/NEXT.png" class="page-btn" onclick="nextDiary()">
+      </div>
+    </div>
+    <button class="top-btn" onclick="backToTop()">TOP</button>
+  </div>
+
+  <div id="profilePopup" class="popup" style="display:none;">
+    <div class="popup-image-container">
+      <div class="close-button" onclick="closeProfile()">×</div>
+      <img src="img/profile-img" class="profile-popup-img">
+      <div class="sns-links">
+        <a href="https://x.com/n_nekomata?s=21&t=UNfIEowMXanUYBRbJpNHYw"><img src="img/x.png" class="sns-icon"></a>
+        <a href="https://www.instagram.com/n.nekomata?igsh=MXF2ZXNubWJwZXZ2eg%3D%3D&utm_source=qr"><img src="img/insta.png" class="sns-icon"></a>
+        <a href="https://www.tiktok.com/@n_nekomata3?_r=1&_t=ZS-96FfzOM46fF"><img src="img/tiktok.png" class="sns-icon"></a>
+      </div>
+    </div>
+  </div>
+
+  <div id="comingPopup" class="popup" style="display:none;">
+    <div class="popup-image-container">
+      <div class="close-button" onclick="closeComing()">×</div>
+      <img src="img/comingsoon.png" class="coming-popup-img">
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
