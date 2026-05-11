@@ -4,181 +4,120 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Angelraise</title>
-  
-  <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
-
   <style>
-    /* --- 基本設定 --- */
+    /* --- 全体リセット --- */
     body, html {
-      margin: 0; padding: 0; min-height: 100vh;
-      font-family: 'DotGothic16', sans-serif;
-      text-align: center;
-      color: white;
-      /* 背景画像を固定して表示 */
-      background: #9253c8 url('img/background.png') no-repeat center center fixed;
+      margin: 0; padding: 0;
+      width: 100%; min-height: 100vh;
+      background: #9253c8 url('img/background.png') no-repeat center top fixed;
       background-size: cover;
+      overflow-x: hidden; /* 横揺れ防止 */
     }
 
-    #top, #intro, #blog {
-      padding: 20px 10px;
-      box-sizing: border-box;
-    }
-
-    /* --- タイトル画像 --- */
-    .header {
+    /* --- TOP画面のレイアウトを固定 --- */
+    #top {
+      display: block; /* 最初は表示 */
       width: 100%;
-      max-width: 500px;
-      height: auto;
-      margin-bottom: 20px;
+      text-align: center;
+      padding-top: 20px;
     }
 
-    /* --- ボタンを2列に並べる --- */
+    .header {
+      width: 90%; max-width: 500px;
+      height: auto;
+      margin: 0 auto 10px auto;
+    }
+
+    /* ボタン2列を安定させる */
     .menu {
       display: grid;
-      grid-template-columns: 1fr 1fr; /* 2列 */
-      gap: 15px; /* ボタン同士の隙間 */
-      max-width: 360px;
-      margin: 0 auto 30px auto;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      width: 85%; max-width: 350px;
+      margin: 10px auto 30px auto;
     }
 
-    .btn {
-      width: 100%;
-      height: auto;
-      cursor: pointer;
-      transition: transform 0.1s;
-    }
-    .btn:active { transform: scale(0.95); }
+    .btn { width: 100%; height: auto; cursor: pointer; }
 
-    /* --- カウンターウィンドウ --- */
-    .counter-window {
+    /* --- 日記画面（全画面） --- */
+    #blog {
+      display: none;
+      width: 100%; min-height: 100vh;
+      background-color: #000; /* 日記中は背景を黒くして没入感を出す */
+    }
+
+    .diary-wrapper {
       position: relative;
-      width: 260px;
-      margin: 0 auto;
+      width: 100%;
+      line-height: 0; /* 画像の下の隙間を消す */
     }
-    .window-bg { width: 100%; height: auto; display: block; }
-    .window-content {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 100%; color: #333;
-    }
-    .counter-text { margin: 0; font-size: 13px; font-weight: bold; }
-    .counter-line { margin: 2px 0; min-height: 30px; display: flex; justify-content: center; align-items: center; }
 
-    /* --- ポップアップ --- */
-    .popup {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.8);
-      display: none; justify-content: center; align-items: center;
-      z-index: 1000;
-    }
-    .popup-image-container { position: relative; width: 90%; max-width: 400px; }
-    .close-button {
-      position: absolute; top: -40px; right: 0;
-      font-size: 40px; color: white; cursor: pointer;
-    }
-    .profile-popup-img, .coming-popup-img, .intro-img, .diary-img {
+    #diaryImage {
       width: 100%; height: auto;
+      display: block;
     }
 
-    /* --- SNSリンク --- */
-    .sns-links {
-      margin-top: 15px;
-      display: flex;
-      justify-content: center;
-      gap: 20px;
+    /* 矢印ボタン */
+    .arrow {
+      position: absolute; bottom: 10%; width: 15%; max-width: 70px;
+      opacity: 0.6; z-index: 10;
     }
-    .sns-icon { width: 40px; height: auto; }
 
-    .top-btn { margin-top: 20px; padding: 10px 20px; font-family: 'DotGothic16'; }
+    /* --- TOPに戻るボタンのデザイン --- */
+    .back-btn-container { padding: 30px 0; text-align: center; }
+    .back-to-top-style {
+      display: inline-block;
+      padding: 12px 30px;
+      background: white; color: #9253c8;
+      border: 4px solid #9253c8; border-radius: 8px;
+      font-weight: bold; cursor: pointer;
+    }
   </style>
 </head>
 <body>
 
   <div id="top">
     <img src="img/toppage.png" class="header">
-    
     <div class="menu">
       <img src="img/Introduction.png" class="btn" onclick="showIntro()">
       <img src="img/GAME.png" class="btn" onclick="openComing()">
       <img src="img/Blog.png" class="btn" onclick="showBlog()">
       <img src="img/PROFILE.png" class="btn" onclick="openProfile()">
     </div>
+    </div>
 
-    <div class="counter-window">
-      <img src="img/window.png" class="window-bg">
-      <div class="window-content">
-        <p class="counter-text">あなたは</p>
-        <div class="counter-line">
-          <script language="javascript" src="//counter1.fc2.com/counter.php?id=41003714&main=1"></script>
-        </div>
-        <p class="counter-text">人目の迷い子です</p>
-      </div>
+  <div id="blog">
+    <div class="diary-wrapper">
+      <img id="diaryImage" src="img/diary1.png">
+      <img src="img/BACK.png" class="arrow" style="left: 5%;">
+      <img src="img/NEXT.png" class="arrow" style="right: 5%;">
+    </div>
+    <div class="back-btn-container">
+      <div class="back-to-top-style" onclick="backToTop()">◀ TOPに戻る</div>
     </div>
   </div>
 
-  <div id="intro" style="display:none;">
-    <img src="img/INTRO.png" class="intro-img">
-    <br>
-    <button class="top-btn" onclick="backToTop()">TOP</button>
-  </div>
+  <script>
+    function backToTop() {
+      // 1. 全画面を確実に隠す
+      document.getElementById("blog").style.display = "none";
+      if(document.getElementById("intro")) document.getElementById("intro").style.display = "none";
+      
+      // 2. TOPを「block」で表示（これが崩れ防止に重要）
+      const top = document.getElementById("top");
+      top.style.display = "block";
+      
+      // 3. 画面サイズを再認識させるため、少しだけスクロールを戻す
+      window.scrollTo(0, 0);
+    }
 
-<div id="blog" style="display:none; padding: 0; text-align: center; background-color: #000; min-height: 100vh;">
-  
-  <div class="diary-wrapper" style="position: relative; display: block; width: 100%; max-width: 100vw; margin: 0 auto;">
-    
-    <img id="diaryImage" src="img/diary1.png" class="diary-img" style="width: 100%; height: auto; min-height: 70vh; object-fit: contain; display: block;">
+    function showBlog() {
+      document.getElementById("top").style.display = "none";
+      document.getElementById("blog").style.display = "block";
+      window.scrollTo(0, 0);
+    }
 
-    <img src="img/BACK.png" style="position: absolute; bottom: 10%; left: 5%; width: 15%; max-width: 80px; height: auto; opacity: 0.6; cursor: default; z-index: 10;">
-
-    <img src="img/NEXT.png" style="position: absolute; bottom: 10%; right: 5%; width: 15%; max-width: 80px; height: auto; opacity: 0.6; cursor: default; z-index: 10;">
-  </div>
-
-  <div style="padding: 20px 0 40px 0;">
-    <div onclick="backToTop()" style="
-      display: inline-block;
-      padding: 12px 40px;
-      background-color: #ffffff;
-      color: #9253c8;
-      border: 4px solid #9253c8;
-      border-radius: 8px;
-      font-family: 'DotGothic16', sans-serif;
-      font-size: 20px;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 4px 0 #7a42a9;
-      transition: all 0.1s;
-    " onmousedown="this.style.transform='translateY(2px)'; this.style.boxShadow='0 2px 0 #7a42a9';" 
-       onmouseup="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 0 #7a42a9';">
-      ◀ TOPへ戻る
-    </div>
-  </div>
-
-</div>
-
-
-
-
-
-  <div id="profilePopup" class="popup" onclick="closeProfile()">
-    <div class="popup-image-container" onclick="event.stopPropagation()">
-      <div class="close-button" onclick="closeProfile()">×</div>
-      <img src="img/pinkprofile.png" class="profile-popup-img">
-      <div class="sns-links">
-        <a href="https://x.com/n_nekomata?s=21&t=UNfIEowMXanUYBRbJpNHYw" target="_blank"><img src="img/x.png" class="sns-icon"></a>
-        <a href="https://www.instagram.com/n.nekomata?igsh=MXF2ZXNubWJwZXZ2eg%3D%3D&utm_source=qr" target="_blank"><img src="img/insta.png" class="sns-icon"></a>
-        <a href="https://www.tiktok.com/@n_nekomata3?_r=1&_t=ZS-96HVj8DwZeP" target="_blank"><img src="img/tiktok.png" class="sns-icon"></a>
-      </div>
-    </div>
-  </div>
-
-  <div id="comingPopup" class="popup" onclick="closeComing()">
-    <div class="popup-image-container" onclick="event.stopPropagation()">
-      <div class="close-button" onclick="closeComing()">×</div>
-      <img src="img/comingsoon.png" class="coming-popup-img">
-    </div>
-  </div>
-
-  <script src="script.js"></script>
+    // 他の showIntro などの関数も同様に「まず全部消してから一つ出す」書き方にしてください
+  </script>
 </body>
 </html>
