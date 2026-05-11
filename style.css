@@ -4,7 +4,6 @@ body, html {
   margin: 0;
   padding: 0;
   width: 100%;
-  /* 縦に長い画像なので、コンテンツに合わせて高さが伸びるように設定 */
   min-height: 100vh;
   font-family: 'DotGothic16', sans-serif;
   
@@ -14,22 +13,23 @@ body, html {
   /* 背景画像の設定 */
   background-image: url('img/background.png');
   
-  /* 【重要】リピートを絶対にさせない */
+  /* 【重要】リピートを絶対にさせない（1枚だけにする） */
   background-repeat: no-repeat;
   
-  /* 【重要】横幅を100%にして、縦は比率（auto）に任せる */
+  /* 【重要】横幅を画面ピッタリ(100%)にし、縦は画像の比率(auto)を守る */
   background-size: 100% auto;
   
-  /* 画像の位置：常に中央・上に固定 */
+  /* 画像の位置：中央・上に配置 */
   background-position: center top;
   
-  /* 背景を固定せず、スクロールと一緒に動くようにする（比率を守るため） */
+  /* 背景を固定せず、スクロールと一緒に動くようにする */
   background-attachment: scroll;
   
   text-align: center;
   color: white;
   overflow-x: hidden;
 }
+
 
 
 
