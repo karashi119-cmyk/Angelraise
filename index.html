@@ -2,103 +2,73 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>天使を育てることになりました｜少女育成ゲーム公式サイト</title>
-
-    <meta name="description" content="少女育成シミュレーションゲーム『天使を育てることになりました』の公式サイトです。あなたは一人の少女をどう導くのか。最新情報やゲーム内容を公開中。">
-
-    <meta property="og:title" content="天使を育てることになりました｜少女育成ゲーム公式サイト">
-    <meta property="og:description" content="あなたの手で、少女の運命を導いてください。">
-    <meta property="og:url" content="https://angel-raise.com">
-    <meta property="og:type" content="website">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>天使を育てることになりました｜少女育成ゲーム公式サイト</title>
+    <meta name="description" content="少女育成シミュレーションゲーム『天使を育てることになりました』の公式サイトです。">
 
     <style>
+        /* 画面全体のデザイン */
         body {
             margin: 0;
             padding: 0;
-            background-color: #A85EE3; /* 画像に合わせた紫色の背景 */
-            font-family: 'Courier New', Courier, monospace; /* ゲーム風のフォント */
-        }
-
-        #top {
-            text-align: center; /* 全体を中央寄せ */
-            padding-bottom: 20px;
-        }
-
-        .header {
-            max-width: 100%; /* スマホで横幅からはみ出さないようにする */
-            height: auto;
-            display: block;
-            margin: 0 auto;
-        }
-
-        .menu {
-            margin: 20px 0;
-        }
-
-        .btn {
-            max-width: 90%; /* ボタンをスマホで見やすく */
-            height: auto;
-            cursor: pointer;
-            display: block;
-            margin: 10px auto; /* ボタンを中央に配置して上下に余白 */
-        }
-
-        /* カウンターウィンドウのスタイル */
-        .counter-window {
-            position: relative;
-            display: block;
-            width: 300px; /* ウィンドウの横幅（お好みで調整してください） */
-            max-width: 90%; /* スマホで画面からはみ出さないようにする */
-            margin: 30px auto; /* 上下に余白を作り、中央に配置 */
+            background-color: #9253c8; /* 背景を紫に */
             text-align: center;
         }
 
+        /* ヘッダー画像 */
+        .header {
+            width: 100%;
+            max-width: 600px; /* 大きすぎないように制限 */
+            height: auto;
+        }
+
+        /* メニューボタン */
+        .menu {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .btn {
+            width: 80%;
+            max-width: 300px;
+            cursor: pointer;
+        }
+
+        /* カウンターの窓 */
+        .counter-window {
+            position: relative;
+            width: 280px; /* 窓の横幅 */
+            margin: 30px auto; /* 真ん中に寄せる */
+        }
         .window-bg {
             width: 100%;
             height: auto;
-            display: block;
         }
 
-        /* 画像の上に重ねるコンテンツのスタイル */
+        /* 窓の中の文字とカウンター */
         .window-content {
             position: absolute;
-            top: 55%; /* 数字の位置（上下方向）を調整 */
+            top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%); /* 完全に中央に配置 */
+            transform: translate(-50%, -50%);
             width: 100%;
-            color: #333; /* 文字の色 */
-            pointer-events: none; /* FC2へのリンクを邪魔しないようにする */
-        }
-
-        .counter-text {
-            margin: 0;
-            font-size: 16px; /* 文字の大きさ */
+            color: #333;
+            font-family: sans-serif;
             font-weight: bold;
         }
-
-        .counter-line {
-            margin: 5px 0;
-            display: flex;
-            align-items: center;
-            justify-content: center; /* FC2カウンターと「人目の」を横並びで中央寄せ */
-        }
-
-        .counter-num {
-            display: inline-block;
-            margin-right: 5px; /* 数字と「人目の」の間の隙間 */
-        }
-
-        /* FC2カウンターの画像自体を少し調整（もしデザインが崩れる場合） */
-        .counter-num img {
-            vertical-align: middle;
-        }
+        .counter-text { margin: 0; font-size: 14px; }
+        .counter-line { margin: 5px 0; }
+        
+        /* ポップアップなどの設定（念のため） */
+        .popup { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 100; }
     </style>
 </head>
 
 <body>
-
   <div id="top">
     <img src="img/toppage.png" class="header">
+    
     <div class="menu">
       <img src="img/Introduction.png" class="btn" onclick="showIntro()">
       <img src="img/GAME.png" class="btn" onclick="openComing()">
@@ -108,56 +78,20 @@
 
     <div class="counter-window">
       <img src="img/window.png" class="window-bg">
-
       <div class="window-content">
         <p class="counter-text">あなたは</p>
-        
         <div class="counter-line">
-          <span class="counter-num">
-            <script language="javascript" type="text/javascript" src="//counter1.fc2.com/counter.php?id=41003714&main=1"></script>
-            <noscript><img src="//counter1.fc2.com/counter_img.php?id=41003714&main=1" /></noscript>
-          </span>
-          <span class="counter-text">人目の</span>
+          <script language="javascript" type="text/javascript" src="//counter1.fc2.com/counter.php?id=41003714&main=1"></script>
         </div>
-
-        <p class="counter-text">迷い子です</p>
-      </div>
-    </div>
-  </div> <div id="intro" style="display:none;">
-    <img src="img/INTRO.png" class="intro-img">
-    <button class="top-btn" onclick="backToTop()">TOP</button>
-  </div>
-
-  <div id="blog" style="display:none;">
-    <div class="diary-container">
-      <img id="diaryImage" src="img/diary1.png" class="diary-img">
-      <div class="page-buttons-overlay">
-        <img id="backBtn" src="img/BACK.png" class="page-btn" onclick="prevDiary()">
-        <img id="nextBtn" src="img/NEXT.png" class="page-btn" onclick="nextDiary()">
-      </div>
-    </div>
-    <button class="top-btn" onclick="backToTop()">TOP</button>
-  </div>
-
-  <div id="profilePopup" class="popup" style="display:none;">
-    <div class="popup-image-container">
-      <div class="close-button" onclick="closeProfile()">×</div>
-      <img src="img/pinkprofile.png" class="profile-popup-img">
-      <div class="sns-links">
-        <a href="https://x.com/n_nekomata?s=21&t=UNfIEowMXanUYBRbJpNHYw"><img src="img/x.png" class="sns-icon"></a>
-        <a href="https://www.instagram.com/n.nekomata?igsh=MXF2ZXNubWJwZXZ2eg%3D%3D&utm_source=qr"><img src="img/insta.png" class="sns-icon"></a>
-        <a href="https://www.tiktok.com/@n_nekomata3?_r=1&_t=ZS-96FfzOM46fF"><img src="img/tiktok.png" class="sns-icon"></a>
+        <p class="counter-text">人目の迷い子です</p>
       </div>
     </div>
   </div>
 
-  <div id="comingPopup" class="popup" style="display:none;">
-    <div class="popup-image-container">
-      <div class="close-button" onclick="closeComing()">×</div>
-      <img src="img/comingsoon.png" class="coming-popup-img">
-    </div>
+  <div id="intro" style="display:none;">
+    <img src="img/INTRO.png" style="width:100%;">
+    <button onclick="backToTop()">TOP</button>
   </div>
-
   <script src="script.js"></script>
 </body>
 </html>
