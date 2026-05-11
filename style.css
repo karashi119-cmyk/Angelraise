@@ -1,33 +1,51 @@
 @import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
 
-body, html {
+/* =========================
+   全体
+========================= */
+
+body {
+
+  margin: 0;
+
+  padding: 0;
+
+  background: black;
+
+  overflow-x: hidden;
+
+  text-align: center;
+}
+
+
+/* 余計な余白を消す */
+html, body {
   margin: 0;
   padding: 0;
   width: 100%;
-  min-height: 100vh;
-  font-family: 'DotGothic16', sans-serif;
+}
+
+#top {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px; /* 看板の上の隙間 */
+}
+
+/* 背景画像：看板と同じ幅（max-width）に制限する */
+.background {
+  position: absolute; /* 他の要素の配置を邪魔しない */
+  top: 0;
+  /* 看板と同じサイズ感に設定 */
+  width: 90%;
+  max-width: 380px; 
+  height: auto;
   
-  /* 背景色の設定（画像が足りない部分に見える色） */
-  background-color: #9253c8; 
-  
-  /* 背景画像の設定 */
-  background-image: url('img/background.png');
-  
-  /* 【重要】リピートを絶対にさせない（1枚だけにする） */
-  background-repeat: no-repeat;
-  
-  /* 【重要】横幅を画面ピッタリ(100%)にし、縦は画像の比率(auto)を守る */
-  background-size: 100% auto;
-  
-  /* 画像の位置：中央・上に配置 */
-  background-position: center top;
-  
-  /* 背景を固定せず、スクロールと一緒に動くようにする */
-  background-attachment: scroll;
-  
-  text-align: center;
-  color: white;
-  overflow-x: hidden;
+  z-index: -1; /* 看板とボタンの後ろに回す */
+  pointer-events: none;
+  image-rendering: pixelated;
 }
 
 
