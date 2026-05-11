@@ -123,25 +123,39 @@
     <button class="top-btn" onclick="backToTop()">TOP</button>
   </div>
 
-<div id="blog" style="display:none; padding: 20px; text-align: center;">
+<div id="blog" style="display:none; padding: 0; text-align: center; background-color: #000; min-height: 100vh;">
   
-  <div class="diary-wrapper" style="position: relative; display: inline-block; max-width: 500px; width: 100%;">
+  <div class="diary-wrapper" style="position: relative; display: block; width: 100%; max-width: 100vw; margin: 0 auto;">
     
-    <img id="diaryImage" src="img/diary1.png" class="diary-img" style="width: 100%; height: auto; display: block; border-radius: 10px;">
+    <img id="diaryImage" src="img/diary1.png" class="diary-img" style="width: 100%; height: auto; min-height: 70vh; object-fit: contain; display: block;">
 
-    <img src="img/BACK.png" alt="BACK" 
-         style="position: absolute; bottom: 20px; left: 20px; width: 80px; height: auto; cursor: default; opacity: 0.7; z-index: 10;">
+    <img src="img/BACK.png" style="position: absolute; bottom: 10%; left: 5%; width: 15%; max-width: 80px; height: auto; opacity: 0.6; cursor: default; z-index: 10;">
 
-    <img src="img/NEXT.png" alt="NEXT" 
-         style="position: absolute; bottom: 20px; right: 20px; width: 80px; height: auto; cursor: default; opacity: 0.7; z-index: 10;">
-
+    <img src="img/NEXT.png" style="position: absolute; bottom: 10%; right: 5%; width: 15%; max-width: 80px; height: auto; opacity: 0.6; cursor: default; z-index: 10;">
   </div>
 
-  <div style="margin-top: 30px;">
-    <img src="img/TOP.png" alt="TOP" class="top-btn" onclick="backToTop()" style="width: 100px; height: auto; cursor: pointer;">
+  <div style="padding: 20px 0 40px 0;">
+    <div onclick="backToTop()" style="
+      display: inline-block;
+      padding: 12px 40px;
+      background-color: #ffffff;
+      color: #9253c8;
+      border: 4px solid #9253c8;
+      border-radius: 8px;
+      font-family: 'DotGothic16', sans-serif;
+      font-size: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 0 #7a42a9;
+      transition: all 0.1s;
+    " onmousedown="this.style.transform='translateY(2px)'; this.style.boxShadow='0 2px 0 #7a42a9';" 
+       onmouseup="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 0 #7a42a9';">
+      ◀ TOPへ戻る
+    </div>
   </div>
 
 </div>
+
 
 
 
