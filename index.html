@@ -9,26 +9,23 @@
   <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
 
   <style>
-    /* 1. 全体の余白を完全にゼロにする */
+    /* 1. 画面全体の余白を完全にゼロにする */
     body, html {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      min-height: 100vh;
+      margin: 0; padding: 0;
+      width: 100%; min-height: 100vh;
       background-color: #9253c8;
       font-family: 'DotGothic16', sans-serif;
       overflow-x: hidden;
     }
 
-    /* 2. 背景画像を画面幅100%にする（基準枠） */
+    /* 2. 背景画像を基準にする枠 */
     .site-wrapper {
       position: relative;
-      width: 100%; /* ここを100%に */
-      margin: 0;   /* 余白なし */
-      line-height: 0; 
+      width: 100%;
+      line-height: 0;
     }
 
-    /* 背景画像：画面の端から端まで広げる */
+    /* 土台の背景画像 */
     .bg-base {
       width: 100%;
       height: auto;
@@ -38,33 +35,26 @@
     /* 3. 背景の真上にコンテンツを重ねる */
     .content-overlay {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%; /* コンテンツも100%幅 */
-      height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
       line-height: normal;
-      padding-top: 5vw; /* 上の隙間を画面幅に応じて調整 */
+      padding-top: 5vw;
     }
 
-    /* タイトルロゴ */
-    .header {
-      width: 90%; /* 画面幅の90%まで広げる */
-      height: auto;
-      margin-bottom: 5vw;
-    }
+    .header { width: 90%; height: auto; margin-bottom: 5vw; }
 
-    /* メニューボタン */
     .menu {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 15px;
-      width: 85%; /* メニューも画面幅いっぱいに近く */
+      width: 85%;
       margin-bottom: 8vw;
     }
-    .btn { width: 100%; height: auto; cursor: pointer; }
+    .btn { width: 100%; height: auto; cursor: pointer; transition: transform 0.1s; }
+    .btn:active { transform: scale(0.95); }
 
     /* カウンター窓 */
     .counter-window {
@@ -73,29 +63,59 @@
     }
     .window-bg { width: 100%; height: auto; }
     .window-content {
-      position: absolute;
-      top: 50%; left: 50%;
+      position: absolute; top: 50%; left: 50%;
       transform: translate(-50%, -50%);
-      width: 100%;
-      color: #333;
+      width: 100%; color: #333; text-align: center;
+    }
+
+    /* --- ポップアップ共通デザイン --- */
+    .popup {
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.85);
+      display: none; /* 初期は非表示 */
+      justify-content: center; align-items: center;
+      z-index: 1000;
+    }
+    .popup-content {
+      position: relative;
+      width: 85%; max-width: 400px;
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+      line-height: normal;
+    }
+    .close-btn {
+      position: absolute; top: -45px; right: 0;
+      font-size: 40px; color: white; cursor: pointer;
+    }
+
+    /* --- 日記・イントロ画面（全画面） --- */
+    .full-page {
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: #000;
+      z-index: 500;
+      display: none;
+      overflow-y: auto;
       text-align: center;
     }
-
-    /* ポップアップ（プロフィール等） */
-    .popup {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.8); display: none;
-      justify-content: center; align-items: center; z-index: 1000;
+    .page-wrapper { position: relative; width: 100%; line-height: 0; }
+    .page-img { width: 100%; height: auto; }
+    .arrow {
+      position: absolute; bottom: 10%;
+      width: 15%; max-width: 70px;
+      opacity: 0.7; cursor: pointer;
     }
-    .popup-content { position: relative; width: 90%; max-width: 400px; }
 
-    /* BLOG画面 */
-    #blog {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: #000; z-index: 100; display: none; overflow-y: auto;
+    .back-to-top {
+      display: inline-block;
+      margin: 30px 0; padding: 12px 25px;
+      background: white; color: #9253c8;
+      border: 4px solid #9253c8; border-radius: 8px;
+      font-weight: bold; cursor: pointer;
     }
-    .diary-wrapper { width: 100%; }
-    #diaryImage { width: 100%; height: auto; }
   </style>
 </head>
 <body>
@@ -104,7 +124,6 @@
     <img src="img/background.png" class="bg-base">
 
     <div class="content-overlay" id="top">
-      
       <img src="img/toppage.png" class="header">
       
       <div class="menu">
@@ -117,23 +136,78 @@
       <div class="counter-window">
         <img src="img/window.png" class="window-bg">
         <div class="window-content">
-          <p style="margin: 0; font-size: min(3.5vw, 14px); font-weight: bold;">あなたは</p>
-          <div style="margin: 2% 0;">
+          <p style="margin:0; font-size:13px; font-weight:bold;">あなたは</p>
+          <div style="margin:5px 0;">
             <script language="javascript" src="//counter1.fc2.com/counter.php?id=41003714&main=1"></script>
           </div>
-          <p style="margin: 0; font-size: min(3.5vw, 14px); font-weight: bold;">人目の迷い子です</p>
+          <p style="margin:0; font-size:13px; font-weight:bold;">人目の迷い子です</p>
         </div>
       </div>
+    </div>
+  </div>
 
+  <div id="introPage" class="full-page">
+    <div class="page-wrapper">
+      <img src="img/INTRO.png" class="page-img">
+      <div class="back-to-top" onclick="closeFullPage()">◀ TOPへ戻る</div>
+    </div>
+  </div>
+
+  <div id="blogPage" class="full-page">
+    <div class="page-wrapper">
+      <img id="diaryImage" src="img/diary1.png" class="page-img">
+      <img src="img/BACK.png" class="arrow" style="left: 5%;" onclick="changeDiary(-1)">
+      <img src="img/NEXT.png" class="arrow" style="right: 5%;" onclick="changeDiary(1)">
+      <div class="back-to-top" onclick="closeFullPage()">◀ TOPへ戻る</div>
+    </div>
+  </div>
+
+  <div id="profilePopup" class="popup" onclick="closePopups()">
+    <div class="popup-content" onclick="event.stopPropagation()">
+      <span class="close-btn" onclick="closePopups()">×</span>
+      <img src="img/pinkprofile.png" style="width:100%; border-radius:10px; margin-bottom:15px;">
+      <div style="display:flex; justify-content:center; gap:20px;">
+        <a href="https://x.com/n_nekomata?s=21&t=UNfIEowMXanUYBRbJpNHYw" target="_blank"><img src="img/x.png" style="width:45px;"></a>
+        <a href="https://www.instagram.com/n.nekomata?igsh=MXF2ZXNubWJwZXZ2eg%3D%3D&utm_source=qr" target="_blank"><img src="img/insta.png" style="width:45px;"></a>
+        <a href="https://www.tiktok.com/@n_nekomata3?_r=1&_t=ZS-96HaGT3U2MP" target="_blank"><img src="img/tiktok.png" style="width:45px;"></a>
+      </div>
+      <p style="color:#666; font-size:12px; margin-top:10px;">SNSも見てね！</p>
+    </div>
+  </div>
+
+  <div id="comingPopup" class="popup" onclick="closePopups()">
+    <div class="popup-content" onclick="event.stopPropagation()" style="background:none;">
+      <span class="close-btn" onclick="closePopups()">×</span>
+      <img src="img/comingsoon.png" style="width:100%; height:auto;">
     </div>
   </div>
 
   <script>
-    function showBlog() { document.getElementById("blog").style.display = "block"; }
-    function backToTop() { document.getElementById("blog").style.display = "none"; }
-    function openProfile() { /* プロフィール表示処理 */ }
-    function openComing() { alert("Coming Soon..."); }
-    function showIntro() { alert("Introduction..."); }
+    // 画面表示・非表示の制御
+    function showIntro() { document.getElementById("introPage").style.display = "block"; window.scrollTo(0,0); }
+    function showBlog() { document.getElementById("blogPage").style.display = "block"; window.scrollTo(0,0); }
+    function closeFullPage() { 
+      document.getElementById("introPage").style.display = "none"; 
+      document.getElementById("blogPage").style.display = "none"; 
+    }
+
+    function openProfile() { document.getElementById("profilePopup").style.display = "flex"; }
+    function openComing() { document.getElementById("comingPopup").style.display = "flex"; }
+    function closePopups() {
+      document.getElementById("profilePopup").style.display = "none";
+      document.getElementById("comingPopup").style.display = "none";
+    }
+
+    // 日記の切り替えロジック
+    let currentDiary = 1;
+    const totalDiaries = 3; // 日記の総数に合わせて変更してください
+    function changeDiary(step) {
+      currentDiary += step;
+      if(currentDiary < 1) currentDiary = totalDiaries;
+      if(currentDiary > totalDiaries) currentDiary = 1;
+      document.getElementById("diaryImage").src = `img/diary${currentDiary}.png`;
+      window.scrollTo(0,0);
+    }
   </script>
 
 </body>
