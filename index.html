@@ -22,60 +22,26 @@
       <img src="img/Blog.png" class="btn" onclick="showBlog()">
       <img src="img/PROFILE.png" class="btn" onclick="openProfile()">
     </div>
-<div class="counter-window" style="position: relative; display: inline-block; width: 250px; text-align: center;">
-  <img src="img/window.png" class="window-bg" style="width: 100%; height: auto; display: block;">
 
-  <div class="window-content" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%;">
-    <p class="counter-text" style="margin: 0; font-size: 14px;">あなたは</p>
-    
-    <div class="counter-line" style="margin: 5px 0;">
-      <span class="counter-num">
-        <script language="javascript" type="text/javascript" src="//counter1.fc2.com/counter.php?id=41003714&main=1"></script>
-        <noscript><img src="//counter1.fc2.com/counter_img.php?id=41003714&main=1" /></noscript>
-      </span>
-      <span class="counter-text" style="font-size: 14px;">人目の</span>
+    <div class="counter-window" style="position: relative; display: block; width: 250px; text-align: center; margin: 20px auto;">
+      <img src="img/window.png" class="window-bg" style="width: 100%; height: auto; display: block;">
+
+      <div class="window-content" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; pointer-events: none;">
+        <p class="counter-text" style="margin: 0; font-size: 14px; color: #333;">あなたは</p>
+        
+        <div class="counter-line" style="margin: 2px 0;">
+          <span class="counter-num">
+            <script language="javascript" type="text/javascript" src="//counter1.fc2.com/counter.php?id=41003714&main=1"></script>
+            <noscript><img src="//counter1.fc2.com/counter_img.php?id=41003714&main=1" /></noscript>
+          </span>
+          <span class="counter-text" style="font-size: 14px; color: #333;">人目の</span>
+        </div>
+
+        <p class="counter-text" style="margin: 0; font-size: 14px; color: #333;">迷い子です</p>
+      </div>
     </div>
-
-    <p class="counter-text" style="margin: 0; font-size: 14px;">迷い子です</p>
-  </div>
-</div>
-
-
-  <div id="intro" style="display:none;">
+  </div> <div id="intro" style="display:none;">
     <img src="img/INTRO.png" class="intro-img">
     <button class="top-btn" onclick="backToTop()">TOP</button>
   </div>
-
-  <div id="blog" style="display:none;">
-    <div class="diary-container">
-      <img id="diaryImage" src="img/diary1.png" class="diary-img">
-      <div class="page-buttons-overlay">
-        <img id="backBtn" src="img/BACK.png" class="page-btn" onclick="prevDiary()">
-        <img id="nextBtn" src="img/NEXT.png" class="page-btn" onclick="nextDiary()">
-      </div>
-    </div>
-    <button class="top-btn" onclick="backToTop()">TOP</button>
-  </div>
-
-  <div id="profilePopup" class="popup" style="display:none;">
-    <div class="popup-image-container">
-      <div class="close-button" onclick="closeProfile()">×</div>
-      <img src="img/pinkprofile.png" class="profile-popup-img">
-      <div class="sns-links">
-        <a href="https://x.com/n_nekomata?s=21&t=UNfIEowMXanUYBRbJpNHYw"><img src="img/x.png" class="sns-icon"></a>
-        <a href="https://www.instagram.com/n.nekomata?igsh=MXF2ZXNubWJwZXZ2eg%3D%3D&utm_source=qr"><img src="img/insta.png" class="sns-icon"></a>
-        <a href="https://www.tiktok.com/@n_nekomata3?_r=1&_t=ZS-96FfzOM46fF"><img src="img/tiktok.png" class="sns-icon"></a>
-      </div>
-    </div>
-  </div>
-
-  <div id="comingPopup" class="popup" style="display:none;">
-    <div class="popup-image-container">
-      <div class="close-button" onclick="closeComing()">×</div>
-      <img src="img/comingsoon.png" class="coming-popup-img">
-    </div>
-  </div>
-
-  <script src="script.js"></script>
-</body>
-</html>
+  ...（以下略）
