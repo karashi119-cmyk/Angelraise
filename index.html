@@ -10,6 +10,89 @@
     <meta property="og:description" content="あなたの手で、少女の運命を導いてください。">
     <meta property="og:url" content="https://angel-raise.com">
     <meta property="og:type" content="website">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #A85EE3; /* 画像に合わせた紫色の背景 */
+            font-family: 'Courier New', Courier, monospace; /* ゲーム風のフォント */
+        }
+
+        #top {
+            text-align: center; /* 全体を中央寄せ */
+            padding-bottom: 20px;
+        }
+
+        .header {
+            max-width: 100%; /* スマホで横幅からはみ出さないようにする */
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .menu {
+            margin: 20px 0;
+        }
+
+        .btn {
+            max-width: 90%; /* ボタンをスマホで見やすく */
+            height: auto;
+            cursor: pointer;
+            display: block;
+            margin: 10px auto; /* ボタンを中央に配置して上下に余白 */
+        }
+
+        /* カウンターウィンドウのスタイル */
+        .counter-window {
+            position: relative;
+            display: block;
+            width: 300px; /* ウィンドウの横幅（お好みで調整してください） */
+            max-width: 90%; /* スマホで画面からはみ出さないようにする */
+            margin: 30px auto; /* 上下に余白を作り、中央に配置 */
+            text-align: center;
+        }
+
+        .window-bg {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* 画像の上に重ねるコンテンツのスタイル */
+        .window-content {
+            position: absolute;
+            top: 55%; /* 数字の位置（上下方向）を調整 */
+            left: 50%;
+            transform: translate(-50%, -50%); /* 完全に中央に配置 */
+            width: 100%;
+            color: #333; /* 文字の色 */
+            pointer-events: none; /* FC2へのリンクを邪魔しないようにする */
+        }
+
+        .counter-text {
+            margin: 0;
+            font-size: 16px; /* 文字の大きさ */
+            font-weight: bold;
+        }
+
+        .counter-line {
+            margin: 5px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center; /* FC2カウンターと「人目の」を横並びで中央寄せ */
+        }
+
+        .counter-num {
+            display: inline-block;
+            margin-right: 5px; /* 数字と「人目の」の間の隙間 */
+        }
+
+        /* FC2カウンターの画像自体を少し調整（もしデザインが崩れる場合） */
+        .counter-num img {
+            vertical-align: middle;
+        }
+    </style>
 </head>
 
 <body>
@@ -23,25 +106,58 @@
       <img src="img/PROFILE.png" class="btn" onclick="openProfile()">
     </div>
 
-    <div class="counter-window" style="position: relative; display: block; width: 250px; text-align: center; margin: 20px auto;">
-      <img src="img/window.png" class="window-bg" style="width: 100%; height: auto; display: block;">
+    <div class="counter-window">
+      <img src="img/window.png" class="window-bg">
 
-      <div class="window-content" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; pointer-events: none;">
-        <p class="counter-text" style="margin: 0; font-size: 14px; color: #333;">あなたは</p>
+      <div class="window-content">
+        <p class="counter-text">あなたは</p>
         
-        <div class="counter-line" style="margin: 2px 0;">
+        <div class="counter-line">
           <span class="counter-num">
             <script language="javascript" type="text/javascript" src="//counter1.fc2.com/counter.php?id=41003714&main=1"></script>
             <noscript><img src="//counter1.fc2.com/counter_img.php?id=41003714&main=1" /></noscript>
           </span>
-          <span class="counter-text" style="font-size: 14px; color: #333;">人目の</span>
+          <span class="counter-text">人目の</span>
         </div>
 
-        <p class="counter-text" style="margin: 0; font-size: 14px; color: #333;">迷い子です</p>
+        <p class="counter-text">迷い子です</p>
       </div>
     </div>
   </div> <div id="intro" style="display:none;">
     <img src="img/INTRO.png" class="intro-img">
     <button class="top-btn" onclick="backToTop()">TOP</button>
   </div>
-  ...（以下略）
+
+  <div id="blog" style="display:none;">
+    <div class="diary-container">
+      <img id="diaryImage" src="img/diary1.png" class="diary-img">
+      <div class="page-buttons-overlay">
+        <img id="backBtn" src="img/BACK.png" class="page-btn" onclick="prevDiary()">
+        <img id="nextBtn" src="img/NEXT.png" class="page-btn" onclick="nextDiary()">
+      </div>
+    </div>
+    <button class="top-btn" onclick="backToTop()">TOP</button>
+  </div>
+
+  <div id="profilePopup" class="popup" style="display:none;">
+    <div class="popup-image-container">
+      <div class="close-button" onclick="closeProfile()">×</div>
+      <img src="img/pinkprofile.png" class="profile-popup-img">
+      <div class="sns-links">
+        <a href="https://x.com/n_nekomata?s=21&t=UNfIEowMXanUYBRbJpNHYw"><img src="img/x.png" class="sns-icon"></a>
+        <a href="https://www.instagram.com/n.nekomata?igsh=MXF2ZXNubWJwZXZ2eg%3D%3D&utm_source=qr"><img src="img/insta.png" class="sns-icon"></a>
+        <a href="https://www.tiktok.com/@n_nekomata3?_r=1&_t=ZS-96FfzOM46fF"><img src="img/tiktok.png" class="sns-icon"></a>
+      </div>
+    </div>
+  </div>
+
+  <div id="comingPopup" class="popup" style="display:none;">
+    <div class="popup-image-container">
+      <div class="close-button" onclick="closeComing()">×</div>
+      <img src="img/comingsoon.png" class="coming-popup-img">
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
