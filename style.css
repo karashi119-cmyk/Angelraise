@@ -1,26 +1,32 @@
 @import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
 
-body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  min-height: 100vh;
-  
 body, html {
   margin: 0;
   padding: 0;
   width: 100%;
   min-height: 100vh;
-  /* 背景の設定を修正 */
-  background-color: #9253c8; /* 画像の外側に表示される色 */
+  font-family: 'DotGothic16', sans-serif;
+  
+  /* 背景色の設定（画像の外側に見える色） */
+  background-color: #9253c8; 
+  
+  /* 背景画像の設定 */
   background-image: url('img/background.png');
   
-  /* 画像の比率を維持したまま全体を表示する設定 */
-  background-size: contain; 
-  background-repeat: repeat; /* containで隙間ができる場合はリピートさせるのがゲーム風でおすすめ */
+  /* リピートを解除 */
+  background-repeat: no-repeat;
+  
+  /* 画像のサイズ：画面の横幅いっぱいに合わせる設定 */
+  background-size: cover; 
+  
+  /* 画像の位置：常に中央・上に固定 */
   background-position: center top;
+  
+  /* スクロールしても背景を動かさない（お好みで） */
   background-attachment: fixed;
   
+  text-align: center;
+  color: white;
   overflow-x: hidden;
 }
 
