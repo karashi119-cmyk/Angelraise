@@ -1,107 +1,212 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>天使を育てることになりました｜少女育成ゲーム公式サイト</title>
-    <meta name="description" content="少女育成シミュレーションゲーム『天使を育てることになりました』の公式サイトです。">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>天使を育てることになりました｜少女育成ゲーム公式サイト</title>
+  <meta name="description" content="少女育成シミュレーションゲーム『天使を育てることになりました』の公式サイトです。">
 
-    <style>
-        /* 1. 背景画像の設定（ここに画像を指定します） */
-        html, body {
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            /* 背景画像を指定 */
-            background-image: url('img/background.png'); 
-            background-size: cover;      /* 画面いっぱいに広げる */
-            background-position: center; /* 中央に合わせる */
-            background-attachment: fixed; /* スクロールしても背景を動かさない */
-            background-color: #9253c8;   /* 画像がない時の予備色 */
-            text-align: center;
-        }
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
 
-        #top {
-            padding: 20px 10px;
-        }
+  <style>
+    /* 全体の設定 */
+    body, html {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      font-family: 'DotGothic16', sans-serif;
+      text-align: center;
+      color: white;
+    }
 
-        .header {
-            width: 100%;
-            max-width: 500px;
-            height: auto;
-            margin-bottom: 10px;
-        }
+    /* 背景画像：imgタグではなくCSSで指定するのが一番安定します */
+    body {
+      background-image: url('img/background.png');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-color: #9253c8; /* 画像がない時の予備 */
+    }
 
-        /* 2. ボタンを2列ずつ並べる */
-        .menu {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            max-width: 350px;
-            margin: 0 auto;
-            padding: 10px;
-        }
+    /* トップページ構成 */
+    #top { padding: 20px 10px; }
 
-        .btn {
-            width: 100%;
-            height: auto;
-            cursor: pointer;
-            transition: transform 0.1s;
-        }
+    .header {
+      width: 100%;
+      max-width: 500px;
+      height: auto;
+      margin-bottom: 10px;
+    }
 
-        .btn:active {
-            transform: scale(0.95);
-        }
+    /* メニュー：2列に並べる魔法 */
+    .menu {
+      display: grid;
+      grid-template-columns: 1fr 1fr; /* 2列 */
+      gap: 15px; /* ボタン同士の隙間 */
+      max-width: 360px; /* 全体の横幅 */
+      margin: 0 auto 30px auto;
+      padding: 0 10px;
+    }
 
-        /* 3. カウンターの窓を整える */
-        .counter-window {
-            position: relative;
-            width: 260px;
-            margin: 30px auto;
-        }
-        .window-bg {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        .window-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 100%;
-            color: #333;
-            font-family: sans-serif;
-            font-weight: bold;
-        }
-        .counter-text { margin: 0; font-size: 13px; }
-        .counter-line { margin: 2px 0; display: flex; justify-content: center; align-items: center; }
-    </style>
+    .btn {
+      width: 100%;
+      height: auto;
+      cursor: pointer;
+      transition: transform 0.1s;
+    }
+    .btn:active { transform: scale(0.95); }
+
+    /* カウンターウィンドウ */
+    .counter-window {
+      position: relative;
+      width: 260px;
+      margin: 0 auto;
+    }
+    .window-bg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .window-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      color: #333; /* 窓の中の文字色 */
+    }
+    .counter-text { margin: 0; font-size: 14px; }
+    .counter-line {
+      margin: 5px 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* ポップアップ共通 */
+    .popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      display: none; /* JSでflexに切り替え */
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .popup-content { position: relative; width: 90%; max-width: 400px; }
+    .close {
+      position: absolute;
+      top: -40px;
+      right: 0;
+      font-size: 40px;
+      color: white;
+      cursor: pointer;
+    }
+
+    /* その他画像調整 */
+    .intro-img, .diary-img, .profile-img, .coming-img {
+      width: 100%;
+      max-width: 500px;
+      height: auto;
+    }
+    .top-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-family: 'DotGothic16', sans-serif;
+      cursor: pointer;
+    }
+  </style>
 </head>
 
 <body>
-  <div id="top">
-    <img src="img/toppage.png" class="header">
-    
-    <div class="menu">
-      <img src="img/Introduction.png" class="btn" onclick="showIntro()">
-      <img src="img/GAME.png" class="btn" onclick="openComing()">
-      <img src="img/Blog.png" class="btn" onclick="showBlog()">
-      <img src="img/PROFILE.png" class="btn" onclick="openProfile()">
-    </div>
 
-    <div class="counter-window">
-      <img src="img/window.png" class="window-bg">
-      <div class="window-content">
-        <p class="counter-text">あなたは</p>
-        <div class="counter-line">
-          <script language="javascript" type="text/javascript" src="//counter1.fc2.com/counter.php?id=41003714&main=1"></script>
-        </div>
-        <p class="counter-text">人目の迷い子です</p>
-      </div>
-    </div>
+<div id="top">
+  <img src="img/toppage.png" class="header">
+
+  <div class="menu">
+    <img src="img/Introduction.png" class="btn" onclick="showIntro()">
+    <img src="img/GAME.png" class="btn" onclick="openComing()">
+    <img src="img/Blog.png" class="btn" onclick="showBlog()">
+    <img src="img/PROFILE.png" class="btn" onclick="openProfile()">
   </div>
 
-  <script src="script.js"></script>
+  <div class="counter-window">
+    <img src="img/window.png" class="window-bg">
+    <div class="window-content">
+      <p class="counter-text">あなたは</p>
+      <div class="counter-line">
+        <script language="javascript" type="text/javascript" src="//counter1.fc2.com/counter.php?id=41003714&main=1"></script>
+        <noscript><img src="//counter1.fc2.com/counter_img.php?id=41003714&main=1" /></noscript>
+      </div>
+      <p class="counter-text">人目の迷い子です</p>
+    </div>
+  </div>
+</div>
+
+<div id="intro" style="display:none; padding: 20px;">
+  <img src="img/INTRO.png" class="intro-img">
+  <br>
+  <button class="top-btn" onclick="backToTop()">TOP</button>
+</div>
+
+<div id="blog" style="display:none; padding: 20px;">
+  <img id="diaryImage" src="img/diary1.png" class="diary-img">
+  <div class="page-buttons" style="margin-top:10px;">
+    <img id="backBtn" src="img/BACK.png" style="width:100px; cursor:pointer;" onclick="prevDiary()">
+    <img id="nextBtn" src="img/NEXT.png" style="width:100px; cursor:pointer;" onclick="nextDiary()">
+  </div>
+  <button class="top-btn" onclick="backToTop()">TOP</button>
+</div>
+
+<div id="profilePopup" class="popup" onclick="closeProfile()">
+  <div class="popup-content" onclick="event.stopPropagation()">
+    <span class="close" onclick="closeProfile()">×</span>
+    <img src="img/profile-img.png" class="profile-img">
+  </div>
+</div>
+
+<div id="comingPopup" class="popup" onclick="closeComing()">
+  <div class="popup-content" onclick="event.stopPropagation()">
+    <span class="close" onclick="closeComing()">×</span>
+    <img src="img/comingsoon.png" class="coming-img">
+  </div>
+</div>
+
+<script>
+// JS部分は送っていただいたロジックをそのまま活用しています
+function showIntro(){
+  document.getElementById("top").style.display = "none";
+  document.getElementById("intro").style.display = "block";
+}
+function showBlog(){
+  document.getElementById("top").style.display = "none";
+  document.getElementById("blog").style.display = "block";
+}
+function backToTop(){
+  document.getElementById("intro").style.display = "none";
+  document.getElementById("blog").style.display = "none";
+  document.getElementById("top").style.display = "block";
+}
+function openProfile(){ document.getElementById("profilePopup").style.display = "flex"; }
+function closeProfile(){ document.getElementById("profilePopup").style.display = "none"; }
+function openComing(){ document.getElementById("comingPopup").style.display = "flex"; }
+function closeComing(){ document.getElementById("comingPopup").style.display = "none"; }
+
+// 日記の処理
+let diaryPage = 1;
+const maxPage = 1;
+function nextDiary(){ if(diaryPage < maxPage){ diaryPage++; updateDiary(); } }
+function prevDiary(){ if(diaryPage > 1){ diaryPage--; updateDiary(); } }
+function updateDiary(){
+  const img = document.getElementById("diaryImage");
+  if(img) img.src = "img/diary" + diaryPage + ".png";
+}
+</script>
+
 </body>
 </html>
