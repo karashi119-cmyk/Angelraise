@@ -7,13 +7,17 @@
     <meta name="description" content="少女育成シミュレーションゲーム『天使を育てることになりました』の公式サイトです。">
 
     <style>
-        /* 1. 背景をしっかり表示させる */
+        /* 1. 背景画像の設定（ここに画像を指定します） */
         html, body {
             margin: 0;
             padding: 0;
-            min-height: 100vh; /* 画面の一番下まで背景色を塗る */
-           <img src="img/background.png" class="background" >
-            background-size: cover;
+            min-height: 100vh;
+            /* 背景画像を指定 */
+            background-image: url('img/background.png'); 
+            background-size: cover;      /* 画面いっぱいに広げる */
+            background-position: center; /* 中央に合わせる */
+            background-attachment: fixed; /* スクロールしても背景を動かさない */
+            background-color: #9253c8;   /* 画像がない時の予備色 */
             text-align: center;
         }
 
@@ -25,35 +29,35 @@
             width: 100%;
             max-width: 500px;
             height: auto;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
 
-        /* 2. ボタンを2列ずつ並べる（魔法のコード） */
+        /* 2. ボタンを2列ずつ並べる */
         .menu {
             display: grid;
-            grid-template-columns: 1fr 1fr; /* 1対1の比率で2列にする */
-            gap: 15px; /* ボタン同士の隙間 */
-            max-width: 400px; /* メニュー全体の最大幅 */
-            margin: 0 auto; /* 中央寄せ */
-            padding: 0 10px;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            max-width: 350px;
+            margin: 0 auto;
+            padding: 10px;
         }
 
         .btn {
-            width: 100%; /* 列の幅いっぱいに広げる */
+            width: 100%;
             height: auto;
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: transform 0.1s;
         }
 
         .btn:active {
-            transform: scale(0.95); /* 押した時に少しへこむ演出 */
+            transform: scale(0.95);
         }
 
         /* 3. カウンターの窓を整える */
         .counter-window {
             position: relative;
-            width: 280px;
-            margin: 40px auto;
+            width: 260px;
+            margin: 30px auto;
         }
         .window-bg {
             width: 100%;
@@ -67,11 +71,11 @@
             transform: translate(-50%, -50%);
             width: 100%;
             color: #333;
-            font-family: 'Hiragino Kaku Gothic ProN', sans-serif;
+            font-family: sans-serif;
             font-weight: bold;
         }
-        .counter-text { margin: 0; font-size: 13px; letter-spacing: 1px; }
-        .counter-line { margin: 3px 0; min-height: 30px; display: flex; justify-content: center; align-items: center; }
+        .counter-text { margin: 0; font-size: 13px; }
+        .counter-line { margin: 2px 0; display: flex; justify-content: center; align-items: center; }
     </style>
 </head>
 
