@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Angelraise</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>天使を育てることになりました｜少女育成ゲーム公式サイト</title>
+
+    <meta name="description" content="少女育成シミュレーションゲーム『天使を育てることになりました』の公式サイトです。あなたは一人の少女をどう導くのか。最新情報やゲーム内容を公開中。">
+
+    <meta property="og:title" content="天使を育てることになりました｜少女育成ゲーム公式サイト">
+    <meta property="og:description" content="あなたの手で、少女の運命を導いてください。">
+    <meta property="og:url" content="https://angel-raise.com">
+    <meta property="og:type" content="website">
 </head>
+
 <body>
 
   <div id="top">
@@ -17,18 +22,24 @@
       <img src="img/Blog.png" class="btn" onclick="showBlog()">
       <img src="img/PROFILE.png" class="btn" onclick="openProfile()">
     </div>
-    <div class="counter-window">
-      <img src="img/window.png" class="window-bg">
-      <div class="window-content">
-        <p class="counter-text">あなたは</p>
-        <div class="counter-line">
-          <span id="count" class="counter-num">000000</span>
-          <span class="counter-text">人目の</span>
-        </div>
-        <p class="counter-text">迷い子です</p>
-      </div>
+<div class="counter-window" style="position: relative; display: inline-block; width: 250px; text-align: center;">
+  <img src="img/window.png" class="window-bg" style="width: 100%; height: auto; display: block;">
+
+  <div class="window-content" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%;">
+    <p class="counter-text" style="margin: 0; font-size: 14px;">あなたは</p>
+    
+    <div class="counter-line" style="margin: 5px 0;">
+      <span class="counter-num">
+        <script language="javascript" type="text/javascript" src="//counter1.fc2.com/counter.php?id=41003714&main=1"></script>
+        <noscript><img src="//counter1.fc2.com/counter_img.php?id=41003714&main=1" /></noscript>
+      </span>
+      <span class="counter-text" style="font-size: 14px;">人目の</span>
     </div>
+
+    <p class="counter-text" style="margin: 0; font-size: 14px;">迷い子です</p>
   </div>
+</div>
+
 
   <div id="intro" style="display:none;">
     <img src="img/INTRO.png" class="intro-img">
