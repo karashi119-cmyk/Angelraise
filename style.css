@@ -4,26 +4,27 @@ body, html {
   margin: 0;
   padding: 0;
   width: 100%;
+  /* 縦に長い画像なので、コンテンツに合わせて高さが伸びるように設定 */
   min-height: 100vh;
   font-family: 'DotGothic16', sans-serif;
   
-  /* 背景色の設定（画像の外側に見える色） */
+  /* 背景色の設定（画像が足りない部分に見える色） */
   background-color: #9253c8; 
   
   /* 背景画像の設定 */
   background-image: url('img/background.png');
   
-  /* リピートを解除 */
+  /* 【重要】リピートを絶対にさせない */
   background-repeat: no-repeat;
   
-  /* 画像のサイズ：画面の横幅いっぱいに合わせる設定 */
-  background-size: cover; 
+  /* 【重要】横幅を100%にして、縦は比率（auto）に任せる */
+  background-size: 100% auto;
   
   /* 画像の位置：常に中央・上に固定 */
   background-position: center top;
   
-  /* スクロールしても背景を動かさない（お好みで） */
-  background-attachment: fixed;
+  /* 背景を固定せず、スクロールと一緒に動くようにする（比率を守るため） */
+  background-attachment: scroll;
   
   text-align: center;
   color: white;
