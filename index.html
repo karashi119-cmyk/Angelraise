@@ -123,16 +123,23 @@
     <button class="top-btn" onclick="backToTop()">TOP</button>
   </div>
 
-  <div id="blog" style="display:none;">
-    <div class="diary-container">
-      <img id="diaryImage" src="img/diary1.png" class="diary-img">
-      <div class="page-buttons-overlay">
-        <button onclick="prevDiary()">BACK</button>
-        <button onclick="nextDiary()">NEXT</button>
-      </div>
+  <div id="blog" style="display:none; padding: 20px;">
+  
+  <div class="diary-container" style="display: flex; flex-direction: column; align-items: center;">
+    <img id="diaryImage" src="img/diary1.png" class="diary-img" style="width: 100%; max-width: 500px; height: auto;">
+
+    <div class="page-buttons" style="margin-top: 15px; display: flex; gap: 20px; justify-content: center;">
+      <img id="backBtn" src="img/BACK.png" style="width: 100px; height: auto; cursor: default; opacity: 0.5;">
+      <img id="nextBtn" src="img/NEXT.png" style="width: 100px; height: auto; cursor: default; opacity: 0.5;">
     </div>
-    <button class="top-btn" onclick="backToTop()">TOP</button>
   </div>
+
+  <button class="top-btn" onclick="backToTop()" style="margin-top: 30px; padding: 10px 20px; font-family: 'DotGothic16'; cursor: pointer;">
+    TOP
+  </button>
+
+</div>
+
 
   <div id="profilePopup" class="popup" onclick="closeProfile()">
     <div class="popup-image-container" onclick="event.stopPropagation()">
