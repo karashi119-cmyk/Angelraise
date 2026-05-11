@@ -4,73 +4,120 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Angelraise</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+
   <style>
-    /* --- 全体リセット --- */
+    /* --- 全体・背景設定 --- */
     body, html {
       margin: 0; padding: 0;
       width: 100%; min-height: 100vh;
-      background: #9253c8 url('img/background.png') no-repeat center top fixed;
-      background-size: cover;
-      overflow-x: hidden; /* 横揺れ防止 */
-    }
-
-    /* --- TOP画面のレイアウトを固定 --- */
-    #top {
-      display: block; /* 最初は表示 */
-      width: 100%;
+      font-family: 'DotGothic16', sans-serif;
+      background-color: #9253c8;
+      /* 背景を比率維持してタイル状に並べる（デカすぎ防止） */
+      background-image: url('img/background.png');
+      background-size: 300px auto; 
+      background-repeat: repeat;
+      background-attachment: fixed;
       text-align: center;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    /* --- TOP画面レイアウト --- */
+    #top { 
+      width: 100%; 
+      display: block; /* 最初は表示 */
       padding-top: 20px;
+      box-sizing: border-box;
     }
+    .header { width: 90%; max-width: 500px; height: auto; margin: 0 auto 20px auto; display: block; }
 
-    .header {
-      width: 90%; max-width: 500px;
-      height: auto;
-      margin: 0 auto 10px auto;
-    }
-
-    /* ボタン2列を安定させる */
+    /* メニュー2列 */
     .menu {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 15px;
       width: 85%; max-width: 350px;
-      margin: 10px auto 30px auto;
+      margin: 0 auto 30px auto;
     }
-
     .btn { width: 100%; height: auto; cursor: pointer; }
 
-    /* --- 日記画面（全画面） --- */
-    #blog {
-      display: none;
-      width: 100%; min-height: 100vh;
-      background-color: #000; /* 日記中は背景を黒くして没入感を出す */
-    }
-
-    .diary-wrapper {
+    /* --- アクセスカウンター（中央寄せ修正） --- */
+    .counter-window {
       position: relative;
+      width: 280px;
+      margin: 20px auto;
+    }
+    .window-bg { width: 100%; height: auto; display: block; }
+    .window-content {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
       width: 100%;
-      line-height: 0; /* 画像の下の隙間を消す */
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
 
-    #diaryImage {
-      width: 100%; height: auto;
-      display: block;
+    /* --- BLOG画面（全画面） --- */
+    #blog { 
+      display: none; 
+      width: 100%; 
+      min-height: 100vh; 
+      background-color: #000; 
+      padding: 0; 
+    }
+    .diary-wrapper { 
+      position: relative; 
+      width: 100%; 
+      line-height: 0; 
+    }
+    #diaryImage { 
+      width: 100%; 
+      height: auto; 
+      display: block; 
+    }
+    .arrow { 
+      position: absolute; 
+      bottom: 10%; 
+      width: 15%; 
+      max-width: 70px; 
+      opacity: 0.6; 
+      z-index: 10;
+      cursor: default; 
     }
 
-    /* 矢印ボタン */
-    .arrow {
-      position: absolute; bottom: 10%; width: 15%; max-width: 70px;
-      opacity: 0.6; z-index: 10;
+    /* --- PROFILE ポップアップ --- */
+    .popup {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8); display: none;
+      justify-content: center; align-items: center; z-index: 1000;
     }
+    .popup-content { position: relative; width: 90%; max-width: 400px; }
+    .close { position: absolute; top: -40px; right: 0; font-size: 40px; color: white; cursor: pointer; }
 
-    /* --- TOPに戻るボタンのデザイン --- */
-    .back-btn-container { padding: 30px 0; text-align: center; }
-    .back-to-top-style {
+    /* --- ボタン共通デザイン --- */
+    .top-btn-style {
       display: inline-block;
+      margin: 30px 0 50px 0;
       padding: 12px 30px;
-      background: white; color: #9253c8;
-      border: 4px solid #9253c8; border-radius: 8px;
-      font-weight: bold; cursor: pointer;
+      background: white; 
+      color: #9253c8;
+      border: 4px solid #9253c8; 
+      border-radius: 8px;
+      font-family: 'DotGothic16', sans-serif;
+      font-size: 18px;
+      font-weight: bold; 
+      cursor: pointer;
+      box-shadow: 0 4px 0 #7a42a9;
+      transition: all 0.1s;
+    }
+    .top-btn-style:active {
+      transform: translateY(2px);
+      box-shadow: 0 2px 0 #7a42a9;
     }
   </style>
 </head>
@@ -78,13 +125,25 @@
 
   <div id="top">
     <img src="img/toppage.png" class="header">
+    
     <div class="menu">
       <img src="img/Introduction.png" class="btn" onclick="showIntro()">
       <img src="img/GAME.png" class="btn" onclick="openComing()">
       <img src="img/Blog.png" class="btn" onclick="showBlog()">
       <img src="img/PROFILE.png" class="btn" onclick="openProfile()">
     </div>
+
+    <div class="counter-window">
+      <img src="img/window.png" class="window-bg">
+      <div class="window-content">
+        <p style="margin: 0; font-size: 13px; font-weight: bold;">あなたは</p>
+        <div style="margin: 5px 0; min-height: 32px; display: flex; justify-content: center; align-items: center;">
+          <script language="javascript" type="text/javascript" src="//counter1.fc2.com/counter.php?id=41003714&main=1"></script>
+        </div>
+        <p style="margin: 0; font-size: 13px; font-weight: bold;">人目の迷い子です</p>
+      </div>
     </div>
+  </div>
 
   <div id="blog">
     <div class="diary-wrapper">
@@ -92,55 +151,80 @@
       <img src="img/BACK.png" class="arrow" style="left: 5%;">
       <img src="img/NEXT.png" class="arrow" style="right: 5%;">
     </div>
-    <div class="back-btn-container">
-      <div class="back-to-top-style" onclick="backToTop()">◀ TOPに戻る</div>
+    <div class="top-btn-style" onclick="backToTop()">◀ TOPへ戻る</div>
+  </div>
+
+  <div id="intro" style="display:none; padding-top: 20px;">
+    <img src="img/INTRO.png" style="width: 100%; max-width: 500px;">
+    <br>
+    <div class="top-btn-style" onclick="backToTop()">◀ TOPへ戻る</div>
+  </div>
+
+    <div id="profilePopup" class="popup" onclick="closeProfile()">
+    <div class="popup-content" onclick="event.stopPropagation()" style="background: white; padding: 20px; border-radius: 15px; text-align: center;">
+      <span class="close" onclick="closeProfile()" style="color: #333;">×</span>
+      
+      <img src="img/profile-img.png" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 15px;">
+      
+      <div class="sns-links" style="display: flex; justify-content: center; gap: 20px; padding: 10px 0;">
+        <a href="https://x.com/n_nekomata?s=21&t=UNfIEowMXanUYBRbJpNHYw" target="_blank">
+          <img src="img/x.png" alt="X" style="width: 45px; height: 45px; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+        </a>
+        
+        <a href="https://www.instagram.com/n.nekomata?igsh=MXF2ZXNubWJwZXZ2eg%3D%3D&utm_source=qr" target="_blank">
+          <img src="img/insta.png" alt="Instagram" style="width: 45px; height: 45px; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+        </a>
+        
+        <a href="https://www.tiktok.com/@n_nekomata3?_r=1&_t=ZS-96HaGT3U2MP" target="_blank">
+          <img src="img/tiktok.png" alt="TikTok" style="width: 45px; height: 45px; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+        </a>
+      </div>
+
+      <p style="color: #666; font-size: 12px; margin-top: 10px;">SNSも見てね！</p>
     </div>
   </div>
 
-  <div class="counter-window" style="position: relative; width: 280px; margin: 20px auto;">
-  <img src="img/window.png" class="window-bg" style="width: 100%; height: auto; display: block;">
 
-  <div class="window-content" style="
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    color: #333;
-    font-family: 'DotGothic16', sans-serif;
-  ">
-    <p style="margin: 0; font-size: 13px; font-weight: bold;">あなたは</p>
-    
-    <div class="counter-line" style="margin: 5px 0; min-height: 32px; display: flex; justify-content: center; align-items: center;">
-      <script language="javascript" type="text/javascript" src="//counter1.fc2.com/counter.php?id=41003714&main=1"></script>
+  <div id="comingPopup" class="popup" onclick="closeComing()">
+    <div class="popup-content" onclick="event.stopPropagation()">
+      <span class="close" onclick="closeComing()">×</span>
+      <img src="img/comingsoon.png" style="width:100%; height:auto;">
     </div>
-    
-    <p style="margin: 0; font-size: 13px; font-weight: bold;">人目の迷い子です</p>
   </div>
-</div>
-
 
   <script>
-    function backToTop() {
-      // 1. 全画面を確実に隠す
+    // 画面切り替え：すべての画面をリセットしてから表示
+    function resetScreens() {
+      document.getElementById("top").style.display = "none";
       document.getElementById("blog").style.display = "none";
-      if(document.getElementById("intro")) document.getElementById("intro").style.display = "none";
-      
-      // 2. TOPを「block」で表示（これが崩れ防止に重要）
-      const top = document.getElementById("top");
-      top.style.display = "block";
-      
-      // 3. 画面サイズを再認識させるため、少しだけスクロールを戻す
+      document.getElementById("intro").style.display = "none";
+      // カウンターが含まれるTOP画面も一旦消えるので、必要に応じて調整
+    }
+
+    function showIntro() {
+      resetScreens();
+      document.getElementById("intro").style.display = "block";
       window.scrollTo(0, 0);
     }
 
     function showBlog() {
-      document.getElementById("top").style.display = "none";
+      resetScreens();
       document.getElementById("blog").style.display = "block";
       window.scrollTo(0, 0);
     }
 
-    // 他の showIntro などの関数も同様に「まず全部消してから一つ出す」書き方にしてください
+    function backToTop() {
+      resetScreens();
+      document.getElementById("top").style.display = "block";
+      window.scrollTo(0, 0);
+    }
+
+    // ポップアップ制御
+    function openProfile() { document.getElementById("profilePopup").style.display = "flex"; }
+    function closeProfile() { document.getElementById("profilePopup").style.display = "none"; }
+    function openComing() { document.getElementById("comingPopup").style.display = "flex"; }
+    function closeComing() { document.getElementById("comingPopup").style.display = "none"; }
   </script>
+
 </body>
 </html>
