@@ -16,11 +16,33 @@ function showBlog() {
     updateDiary(); 
 }
 
+/* --- 画面切り替えの決定版 --- */
+
 function backToTop() {
-    document.getElementById("intro").style.display = "none";
-    document.getElementById("blog").style.display = "none";
-    document.getElementById("top").style.display = "flex";
-    window.scrollTo(0, 0);
+  // すべてのメインコンテンツを一度全部消す（これがバグ防止のコツ！）
+  document.getElementById("top").style.display = "none";
+  document.getElementById("intro").style.display = "none";
+  document.getElementById("blog").style.display = "none";
+  
+  // TOPだけを表示する
+  document.getElementById("top").style.display = "block";
+  
+  // 画面を一番上までスクロールさせる
+  window.scrollTo(0, 0);
+}
+
+function showIntro() {
+  document.getElementById("top").style.display = "none";
+  document.getElementById("blog").style.display = "none";
+  document.getElementById("intro").style.display = "block";
+  window.scrollTo(0, 0);
+}
+
+function showBlog() {
+  document.getElementById("top").style.display = "none";
+  document.getElementById("intro").style.display = "none";
+  document.getElementById("blog").style.display = "block";
+  window.scrollTo(0, 0);
 }
 
 /* =========================================
