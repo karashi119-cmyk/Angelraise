@@ -3,51 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>天使を育てることになりました｜少女育成ゲーム公式サイト</title>
-  <meta name="description" content="少女育成シミュレーションゲーム『天使を育てることになりました』の公式サイトです。">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <title>Angelraise</title>
+  
   <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
 
   <style>
-    /* 全体の設定 */
+    /* --- 基本設定 --- */
     body, html {
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
+      margin: 0; padding: 0; min-height: 100vh;
       font-family: 'DotGothic16', sans-serif;
       text-align: center;
       color: white;
-    }
-
-    /* 背景画像：imgタグではなくCSSで指定するのが一番安定します */
-    body {
-      background-image: url('img/background.png');
+      /* 背景画像を固定して表示 */
+      background: #9253c8 url('img/background.png') no-repeat center center fixed;
       background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      background-color: #9253c8; /* 画像がない時の予備 */
     }
 
-    /* トップページ構成 */
-    #top { padding: 20px 10px; }
+    #top, #intro, #blog {
+      padding: 20px 10px;
+      box-sizing: border-box;
+    }
 
+    /* --- タイトル画像 --- */
     .header {
       width: 100%;
       max-width: 500px;
       height: auto;
-      margin-bottom: 10px;
+      margin-bottom: 20px;
     }
 
-    /* メニュー：2列に並べる魔法 */
+    /* --- ボタンを2列に並べる --- */
     .menu {
       display: grid;
       grid-template-columns: 1fr 1fr; /* 2列 */
       gap: 15px; /* ボタン同士の隙間 */
-      max-width: 360px; /* 全体の横幅 */
+      max-width: 360px;
       margin: 0 auto 30px auto;
-      padding: 0 10px;
     }
 
     .btn {
@@ -58,155 +49,110 @@
     }
     .btn:active { transform: scale(0.95); }
 
-    /* カウンターウィンドウ */
+    /* --- カウンターウィンドウ --- */
     .counter-window {
       position: relative;
       width: 260px;
       margin: 0 auto;
     }
-    .window-bg {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
+    .window-bg { width: 100%; height: auto; display: block; }
     .window-content {
       position: absolute;
-      top: 50%;
-      left: 50%;
+      top: 50%; left: 50%;
       transform: translate(-50%, -50%);
-      width: 100%;
-      color: #333; /* 窓の中の文字色 */
+      width: 100%; color: #333;
     }
-    .counter-text { margin: 0; font-size: 14px; }
-    .counter-line {
-      margin: 5px 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+    .counter-text { margin: 0; font-size: 13px; font-weight: bold; }
+    .counter-line { margin: 2px 0; min-height: 30px; display: flex; justify-content: center; align-items: center; }
 
-    /* ポップアップ共通 */
+    /* --- ポップアップ --- */
     .popup {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       background: rgba(0,0,0,0.8);
-      display: none; /* JSでflexに切り替え */
-      justify-content: center;
-      align-items: center;
+      display: none; justify-content: center; align-items: center;
       z-index: 1000;
     }
-    .popup-content { position: relative; width: 90%; max-width: 400px; }
-    .close {
-      position: absolute;
-      top: -40px;
-      right: 0;
-      font-size: 40px;
-      color: white;
-      cursor: pointer;
+    .popup-image-container { position: relative; width: 90%; max-width: 400px; }
+    .close-button {
+      position: absolute; top: -40px; right: 0;
+      font-size: 40px; color: white; cursor: pointer;
+    }
+    .profile-popup-img, .coming-popup-img, .intro-img, .diary-img {
+      width: 100%; height: auto;
     }
 
-    /* その他画像調整 */
-    .intro-img, .diary-img, .profile-img, .coming-img {
-      width: 100%;
-      max-width: 500px;
-      height: auto;
+    /* --- SNSリンク --- */
+    .sns-links {
+      margin-top: 15px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
     }
-    .top-btn {
-      margin-top: 20px;
-      padding: 10px 20px;
-      font-family: 'DotGothic16', sans-serif;
-      cursor: pointer;
-    }
+    .sns-icon { width: 40px; height: auto; }
+
+    .top-btn { margin-top: 20px; padding: 10px 20px; font-family: 'DotGothic16'; }
   </style>
 </head>
-
 <body>
 
-<div id="top">
-  <img src="img/toppage.png" class="header">
+  <div id="top">
+    <img src="img/toppage.png" class="header">
+    
+    <div class="menu">
+      <img src="img/Introduction.png" class="btn" onclick="showIntro()">
+      <img src="img/GAME.png" class="btn" onclick="openComing()">
+      <img src="img/Blog.png" class="btn" onclick="showBlog()">
+      <img src="img/PROFILE.png" class="btn" onclick="openProfile()">
+    </div>
 
-  <div class="menu">
-    <img src="img/Introduction.png" class="btn" onclick="showIntro()">
-    <img src="img/GAME.png" class="btn" onclick="openComing()">
-    <img src="img/Blog.png" class="btn" onclick="showBlog()">
-    <img src="img/PROFILE.png" class="btn" onclick="openProfile()">
-  </div>
-
-  <div class="counter-window">
-    <img src="img/window.png" class="window-bg">
-    <div class="window-content">
-      <p class="counter-text">あなたは</p>
-      <div class="counter-line">
-        <script language="javascript" type="text/javascript" src="//counter1.fc2.com/counter.php?id=41003714&main=1"></script>
-        <noscript><img src="//counter1.fc2.com/counter_img.php?id=41003714&main=1" /></noscript>
+    <div class="counter-window">
+      <img src="img/window.png" class="window-bg">
+      <div class="window-content">
+        <p class="counter-text">あなたは</p>
+        <div class="counter-line">
+          <script language="javascript" src="//counter1.fc2.com/counter.php?id=41003714&main=1"></script>
+        </div>
+        <p class="counter-text">人目の迷い子です</p>
       </div>
-      <p class="counter-text">人目の迷い子です</p>
     </div>
   </div>
-</div>
 
-<div id="intro" style="display:none; padding: 20px;">
-  <img src="img/INTRO.png" class="intro-img">
-  <br>
-  <button class="top-btn" onclick="backToTop()">TOP</button>
-</div>
-
-<div id="blog" style="display:none; padding: 20px;">
-  <img id="diaryImage" src="img/diary1.png" class="diary-img">
-  <div class="page-buttons" style="margin-top:10px;">
-    <img id="backBtn" src="img/BACK.png" style="width:100px; cursor:pointer;" onclick="prevDiary()">
-    <img id="nextBtn" src="img/NEXT.png" style="width:100px; cursor:pointer;" onclick="nextDiary()">
+  <div id="intro" style="display:none;">
+    <img src="img/INTRO.png" class="intro-img">
+    <br>
+    <button class="top-btn" onclick="backToTop()">TOP</button>
   </div>
-  <button class="top-btn" onclick="backToTop()">TOP</button>
-</div>
 
-<div id="profilePopup" class="popup" onclick="closeProfile()">
-  <div class="popup-content" onclick="event.stopPropagation()">
-    <span class="close" onclick="closeProfile()">×</span>
-    <img src="img/profile-img.png" class="profile-img">
+  <div id="blog" style="display:none;">
+    <div class="diary-container">
+      <img id="diaryImage" src="img/diary1.png" class="diary-img">
+      <div class="page-buttons-overlay">
+        <button onclick="prevDiary()">BACK</button>
+        <button onclick="nextDiary()">NEXT</button>
+      </div>
+    </div>
+    <button class="top-btn" onclick="backToTop()">TOP</button>
   </div>
-</div>
 
-<div id="comingPopup" class="popup" onclick="closeComing()">
-  <div class="popup-content" onclick="event.stopPropagation()">
-    <span class="close" onclick="closeComing()">×</span>
-    <img src="img/comingsoon.png" class="coming-img">
+  <div id="profilePopup" class="popup" onclick="closeProfile()">
+    <div class="popup-image-container" onclick="event.stopPropagation()">
+      <div class="close-button" onclick="closeProfile()">×</div>
+      <img src="img/profile-img.png" class="profile-popup-img">
+      <div class="sns-links">
+        <a href="https://x.com/n_nekomata?s=21&t=UNfIEowMXanUYBRbJpNHYw" target="_blank"><img src="img/x.png" class="sns-icon"></a>
+        <a href="https://www.instagram.com/n.nekomata?igsh=MXF2ZXNubWJwZXZ2eg%3D%3D&utm_source=qr" target="_blank"><img src="img/insta.png" class="sns-icon"></a>
+        <a href="https://www.tiktok.com/@n_nekomata3?_r=1&_t=ZS-96HVj8DwZeP" target="_blank"><img src="img/tiktok.png" class="sns-icon"></a>
+      </div>
+    </div>
   </div>
-</div>
 
-<script>
-// JS部分は送っていただいたロジックをそのまま活用しています
-function showIntro(){
-  document.getElementById("top").style.display = "none";
-  document.getElementById("intro").style.display = "block";
-}
-function showBlog(){
-  document.getElementById("top").style.display = "none";
-  document.getElementById("blog").style.display = "block";
-}
-function backToTop(){
-  document.getElementById("intro").style.display = "none";
-  document.getElementById("blog").style.display = "none";
-  document.getElementById("top").style.display = "block";
-}
-function openProfile(){ document.getElementById("profilePopup").style.display = "flex"; }
-function closeProfile(){ document.getElementById("profilePopup").style.display = "none"; }
-function openComing(){ document.getElementById("comingPopup").style.display = "flex"; }
-function closeComing(){ document.getElementById("comingPopup").style.display = "none"; }
+  <div id="comingPopup" class="popup" onclick="closeComing()">
+    <div class="popup-image-container" onclick="event.stopPropagation()">
+      <div class="close-button" onclick="closeComing()">×</div>
+      <img src="img/comingsoon.png" class="coming-popup-img">
+    </div>
+  </div>
 
-// 日記の処理
-let diaryPage = 1;
-const maxPage = 1;
-function nextDiary(){ if(diaryPage < maxPage){ diaryPage++; updateDiary(); } }
-function prevDiary(){ if(diaryPage > 1){ diaryPage--; updateDiary(); } }
-function updateDiary(){
-  const img = document.getElementById("diaryImage");
-  if(img) img.src = "img/diary" + diaryPage + ".png";
-}
-</script>
-
+  <script src="script.js"></script>
 </body>
 </html>
