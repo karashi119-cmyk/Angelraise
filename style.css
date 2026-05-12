@@ -47,13 +47,25 @@ body, html {
   display: flex; justify-content: center; align-items: center;
 }
 .window-bg { position: absolute; width: 100%; height: 100%; z-index: 1; }
-.window-content {
-  position: relative; z-index: 2; padding: 40px 60px; text-align: center;
+/* 基本（スマホ用）：16px〜24pxくらいで動く */
+.window-content p {
+  margin: 0;
+  font-size: clamp(16px, 4vw, 24px);
+  font-weight: bold;
 }
-.counter-text, .counter-num {
-  font-size: 64px; font-weight: bold; color: #ff4fa3;
-  text-shadow: 3px 3px 0 #fff, -3px 3px 0 #fff, 3px -3px 0 #fff, -3px 3px 0 #fff;
+
+/* PC用：画面の横幅が768px以上のとき、強制的にデカくする */
+@media (min-width: 768px) {
+  .window-content p {
+    font-size: 64px !important; /* 8の倍数：最大級のデカさ */
+  }
+  
+  #fc2_counter_area {
+    transform: scale(2.0) !important; /* カウンター画像も2倍に */
+    margin: 24px 0 !important; /* 上下の隙間も8の倍数で広げる */
+  }
 }
+
 
 /* 日記ページ：画面いっぱい & ボタン位置調整 */
 .diary-container { position: relative; width: 100%; }
