@@ -135,24 +135,16 @@
 
       <div class="counter-window">
         <img src="img/window.png" class="window-bg">
-/* 基本（スマホ用）：16px〜24pxくらいで動く */
-.window-content p {
-  margin: 0;
-  font-size: clamp(16px, 4vw, 24px);
-  font-weight: bold;
-}
-
-/* PC用：画面の横幅が768px以上のとき、強制的にデカくする */
-@media (min-width: 768px) {
-  .window-content p {
-    font-size: 64px !important; /* 8の倍数：最大級のデカさ */
-  }
+<div class="window-content">
+  <p style="margin: 0; font-size: clamp(16px, 2.5vw, 32px); font-weight: bold;">あなたは</p>
   
-  #fc2_counter_area {
-    transform: scale(2.0) !important; /* カウンター画像も2倍に */
-    margin: 24px 0 !important; /* 上下の隙間も8の倍数で広げる */
-  }
-}
+  <div id="fc2_counter_area" style="margin: 8px 0; transform: scale(1.5); transform-origin: center;">
+    <script language="javascript" src="//counter1.fc2.com/counter.php?id=41003714&main=1"></script>
+  </div>
+  
+  <p style="margin: 0; font-size: clamp(16px, 2.5vw, 32px); font-weight: bold;">人目の迷い子です</p>
+</div>
+
 
 
 
